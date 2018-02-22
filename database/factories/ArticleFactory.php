@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 $factory->define(\App\Models\Article::class, function (Faker $faker) {
     return [
         'user_id' => function () {
-            return factory(\App\Models\User::class)->create()->id;
+            return create(\App\Models\User::class)->id;
         },
         'title' => $faker->sentence,
         'body' => $faker->paragraph

@@ -5,42 +5,38 @@ namespace Tests\Unit;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ArticleTest extends TestCase
+class CommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @var Article
-     */
-    protected $article;
+    protected $comment;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->article = create(Article::class);
+        $this->comment = create(Comment::class);
     }
 
     /** @test */
-    public function 一人の作者がいる()
+    public function 一つの記事を持つ()
     {
         $this->assertInstanceOf(
-            User::class,
-            $this->article->creator
+            Article::class,
+            $this->comment->article
         );
     }
 
     /** @test */
-    public function 複数のコメントを持てる()
+    public function 一人の作者を持つ()
     {
         $this->assertInstanceOf(
-            Collection::class,
-            $this->article->comments
+            User::class,
+            $this->comment->owner
         );
     }
 }
